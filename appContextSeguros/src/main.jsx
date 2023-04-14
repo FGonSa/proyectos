@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import DemoComponent from './components/DemoComponent'
+import MainScreen from './screens/MainScreen'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <DemoComponent />
-    <DemoComponent />
+   <MainScreen />
   </React.StrictMode>,
 )
