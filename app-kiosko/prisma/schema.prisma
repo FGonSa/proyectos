@@ -9,3 +9,39 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+//Un producto tiene una categoría
+//Relacionamos Producto con Categorçia mediante los ID
+model Product {
+  id Int @id @default(autoincrement())
+  name String
+  price Float
+  image String
+  category Category @relation(fields: [categoryId], references: [id]) //Conexión entre tablas mediante los ID
+  categoryId Int
+  autorId Int
+  autor Author @relation(fields: [autorId], references: [id])
+}
+
+//Una Categoría puede tener varios productos
+model Category{
+  id Int @id @default(autoincrement())
+  name String
+  icon String
+  products Product[] 
+}
+
+model Order{
+  id Int @id @default(autoincrement())
+  name String
+  date String
+  total Float
+  pedido Json
+}
+
+model Author{
+  id Int @id @default(autoincrement())
+  name String
+  image String
+  products Product[] 
+}
