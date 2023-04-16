@@ -27,7 +27,7 @@ export function calcularPlan(plan){
 }
 
 export function formatearDinero(cantidad){
-    return cantidad.toLocaleString('es-EUR', {
+    return cantidad.toLocaleString('es-ES', {
         style: 'currency',
         currency: "EUR"
     })

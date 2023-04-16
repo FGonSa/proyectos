@@ -13,11 +13,14 @@ const CotizadorProvider = ({children}) => {
     plan: ''
   })
 
-  //Error
+  //Variable Error
   const [error, setError] = useState(false)
 
   //Variable con el resultado de la cotización
   const [resultado, setResultado] = useState(0)
+
+  //Variable Loading
+  const [loading, setLoading] = useState(false)
 
   //Función para actualizar el objeto
   const handleChangeDatos = e => {
@@ -45,7 +48,12 @@ const CotizadorProvider = ({children}) => {
     //Lo convertimos a Moneda
     base = formatearDinero(base)
 
-    console.log(base)
+    setLoading(true)
+
+    setTimeout(() => {
+      setResultado(base)
+      setLoading(false)
+    }, 3000)
 
     setResultado(base)
 
@@ -61,7 +69,9 @@ const CotizadorProvider = ({children}) => {
         error, 
         setError,
         cotizarSeguro, //enviamos función para cotizar seguro
-        resultado //enviamos resultado de la cotización
+        resultado, //enviamos resultado de la cotización
+        loading,
+        setLoading,
       }} 
     >
       {children}
