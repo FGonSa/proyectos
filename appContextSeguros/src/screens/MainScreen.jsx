@@ -1,7 +1,12 @@
 import React from 'react'
 import Formulario from '../components/Formulario'
+import useCotizador from '../hooks/useCotizador'
+
 
 function MainScreen() {
+
+  const {resultado} = useCotizador()
+
   return (
     <div>
         <header className="my-10">
@@ -12,6 +17,7 @@ function MainScreen() {
 
         <main className='bg-white md:w-2/3 lg:w-2/4 mx-auto shadow rounded-lg p-10'>
         <Formulario />
+        {resultado}
         </main>
         
     </div>
