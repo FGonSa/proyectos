@@ -6,7 +6,7 @@ function Layout({children, pagina}) {
   return (
     <>
     <Head>
-        <title>Book Catalog - {pagina}</title>
+        <title>Franky Book - {pagina}</title>
         <meta name='description' content='Book Catalog' />
     </Head>
 
