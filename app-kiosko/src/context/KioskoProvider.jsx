@@ -7,6 +7,7 @@ const KioskoProvider = ({ children }) => {
   //Array vacío
   const [categorias, setCategorias] = useState([]);
 
+  //Objeto Categoría Actual vacío
   const [categoriaActual, setCategoriaActual] = useState({});
 
   //Obtenemos las categorías de la Base de Datos mediante Axios
@@ -28,7 +29,6 @@ const KioskoProvider = ({ children }) => {
   const handleClickCategoria = (id) => {
     
     const categoria = categorias.filter((cat) => cat.id === id);
-    console.log(categoria)
     setCategoriaActual(categoria[0]);
   };
 
