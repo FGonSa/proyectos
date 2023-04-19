@@ -11,7 +11,9 @@ function Categoria({categoria}) {
   return (
     //Si la categoría actual coincide con el id recibido, se queda seleccionada
     //El ? es porque al iniciar por primera vez la app puede no haber ID
-    <div className={`${
+    <div 
+    onClick={() => handleClickCategoria(id)}
+    className={`${
       categoriaActual?.id === id ? "bg-amber-300"  : ""}
     flex items-center gap-4 w-full border p-5 hover:bg-amber-300`}>
         <Image 

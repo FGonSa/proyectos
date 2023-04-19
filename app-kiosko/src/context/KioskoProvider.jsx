@@ -17,10 +17,17 @@ const KioskoProvider = ({ children }) => {
     setCategorias(data);
   };
 
-  //
+  //Obtenemos las categorías al iniciar la APP
   useEffect(() => {
     obtenerCategorias();
   }, []);
+
+  //Al iniciar la APP se marca por defecto la categoría 0
+  //Esto se ejecuta al cargar las categorías de las dependencias
+  //Las categorías se obtienen al cargar el useEffect anterior
+  useEffect(()=>{
+    setCategoriaActual(categorias[0])
+  },[categorias])
 
   //Recibe un el id del objeto clickado
   //Filtramos las categorías por el id recibido

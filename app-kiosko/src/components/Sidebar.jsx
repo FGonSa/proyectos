@@ -10,7 +10,7 @@ function Sidebar() {
 
   return (
     <>
-    <Image width={200} height={100} src="/assets/img/logoBook.png"  alt="logo" />
+    <Image width={500} height={100} src="/assets/img/logoBook.png"  alt="logo" />
 
     <nav>
       {categorias.map(categoria => (
