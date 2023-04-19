@@ -10,6 +10,8 @@ const KioskoProvider = ({ children }) => {
   //Objeto Categoría Actual vacío
   const [categoriaActual, setCategoriaActual] = useState({});
 
+  const [autores, setAutores] = useState([])
+
   //Obtenemos las categorías de la Base de Datos mediante Axios
   //Guardamos las categorías en el array inicial vacío
   const obtenerCategorias = async () => {
@@ -17,9 +19,15 @@ const KioskoProvider = ({ children }) => {
     setCategorias(data);
   };
 
+  const obtenerAutores = async () => {
+    const {data} = await axios("/api/productos")
+    setAutores(data)
+  }
+
   //Obtenemos las categorías al iniciar la APP
   useEffect(() => {
     obtenerCategorias();
+    obtenerAutores()
   }, []);
 
   //Al iniciar la APP se marca por defecto la categoría 0
@@ -41,7 +49,7 @@ const KioskoProvider = ({ children }) => {
 
   return (
     <KioskoContext.Provider
-      value={{ categorias, categoriaActual, handleClickCategoria }}
+      value={{ categorias, categoriaActual, handleClickCategoria, autores }}
     >
       {children}
     </KioskoContext.Provider>
