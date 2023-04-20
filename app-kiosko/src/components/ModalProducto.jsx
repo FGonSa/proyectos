@@ -1,12 +1,26 @@
 import useKiosko from "@/hooks/useKiosko";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { formatearDinero } from "@/helpers/helpers";
 
 const ModalProducto = () => {
-  const { producto, handleChangeModal, handleAgregarPedido } = useKiosko();
+  const { producto, handleChangeModal, handleAgregarPedido, pedido } =
+    useKiosko();
 
   const [cantidad, setCantidad] = useState(1);
+
+  const [edicion, setEdicion] = useState(false);
+
+  useEffect(() => {
+    if (pedido.some((pedidoState) => pedidoState.id === producto.id)) {
+      const productoEdicion = pedido.find(
+        (pedidoState) => pedidoState.id === producto.id
+      );
+  
+    setEdicion(true);
+    setCantidad(productoEdicion.cantidad);
+}
+  }, [producto, pedido]);
 
   return (
     <div className="md:flex gap-10">
@@ -45,11 +59,13 @@ const ModalProducto = () => {
         </p>
 
         <div className="flex gap-4 mt-5">
-          <button 
-          type="button" onClick={()=>{
-            if(cantidad<=1) return
-            setCantidad(cantidad - 1)
-          }}>
+          <button
+            type="button"
+            onClick={() => {
+              if (cantidad <= 1) return;
+              setCantidad(cantidad - 1);
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -69,10 +85,11 @@ const ModalProducto = () => {
           <p className="text-3xl">{cantidad}</p>
 
           <button
-            type="button" onClick={()=>{
-                if(cantidad>=5) return
-                setCantidad(cantidad + 1)
-              }}
+            type="button"
+            onClick={() => {
+              if (cantidad >= 5) return;
+              setCantidad(cantidad + 1);
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -92,10 +109,12 @@ const ModalProducto = () => {
         </div>
 
         <button
-        onClick={() => handleAgregarPedido({...producto, cantidad})}
-        type="button"
-        className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
-        >Add to Basket</button>
+          onClick={() => handleAgregarPedido({ ...producto, cantidad })}
+          type="button"
+          className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
+        >
+          {edicion ? "Save changes" : "Add to basket"}
+        </button>
       </div>
     </div>
   );
