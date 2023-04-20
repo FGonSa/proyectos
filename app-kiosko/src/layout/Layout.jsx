@@ -4,6 +4,8 @@ import Sidebar from '@/components/Sidebar'
 import Modal from 'react-modal'
 import useKiosko from '@/hooks/useKiosko';
 import ModalProducto from '@/components/ModalProducto';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css"
 
 //Estilos para el Modal
 const customStyles = {
@@ -52,6 +54,8 @@ function Layout({children, pagina}) {
         <ModalProducto />
       </Modal>
     )}
+
+    <ToastContainer />
     </>
   )
 }

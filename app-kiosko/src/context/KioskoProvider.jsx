@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const KioskoContext = createContext();
 
@@ -72,8 +73,10 @@ const KioskoProvider = ({ children }) => {
       //Actualizar la cantidad
       const pedidoActualizado = pedido.map(produ => produ.id === producto.id ? producto : produ)
       setPedido(pedidoActualizado)
+      toast.success('Updated successfully.')
     }else{
       setPedido([...pedido, producto])
+      toast.success('Added to Basket.')
     }
     setModal(false)
   }
