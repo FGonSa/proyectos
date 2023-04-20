@@ -1,8 +1,29 @@
 import React from 'react'
 import Head from 'next/head'
 import Sidebar from '@/components/Sidebar'
+import Modal from 'react-modal'
+import useKiosko from '@/hooks/useKiosko';
+
+//Estilos para el Modal
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
+//Situamos el Modal
+Modal.setAppElement('#__next');
+
 
 function Layout({children, pagina}) {
+
+  const {modal} = useKiosko()
+
   return (
     <>
     <Head>
@@ -21,6 +42,15 @@ function Layout({children, pagina}) {
           </div>
           </main>
     </div>
+
+{/*Si Modal es true, renderiza componente*/}
+    {modal && (
+      <Modal
+      isOpen={modal}
+      style={customStyles}>
+        <h1>Modal...</h1>
+      </Modal>
+    )}
     </>
   )
 }
