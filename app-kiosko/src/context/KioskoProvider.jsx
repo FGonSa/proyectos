@@ -62,6 +62,7 @@ const KioskoProvider = ({ children }) => {
   return (
     <KioskoContext.Provider
       value={{
+        producto,
         categorias,
         categoriaActual,
         handleClickCategoria,

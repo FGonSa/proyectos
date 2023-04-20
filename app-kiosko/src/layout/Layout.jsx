@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Sidebar from '@/components/Sidebar'
 import Modal from 'react-modal'
 import useKiosko from '@/hooks/useKiosko';
+import ModalProducto from '@/components/ModalProducto';
 
 //Estilos para el Modal
 const customStyles = {
@@ -48,7 +49,7 @@ function Layout({children, pagina}) {
       <Modal
       isOpen={modal}
       style={customStyles}>
-        <h1>Modal...</h1>
+        <ModalProducto />
       </Modal>
     )}
     </>
