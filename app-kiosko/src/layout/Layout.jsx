@@ -6,6 +6,7 @@ import useKiosko from '@/hooks/useKiosko';
 import ModalProducto from '@/components/ModalProducto';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
+import Pasos from '@/components/Pasos';
 
 //Estilos para el Modal
 const customStyles = {
@@ -41,6 +42,7 @@ function Layout({children, pagina}) {
 
         <main className='md:w-8/12 xl:w-3/4 2xl:w-4/5 h-screen overflow-y-scroll'>
           <div className='p-10'>
+            <Pasos />
           {children}
           </div>
           </main>
