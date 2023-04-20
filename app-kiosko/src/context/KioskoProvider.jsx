@@ -16,6 +16,8 @@ const KioskoProvider = ({ children }) => {
 
   const [modal, setModal] = useState(false);
 
+  const [pedido, setPedido] = useState([])
+
   //Obtenemos las categorías de la Base de Datos mediante Axios
   //Guardamos las categorías en el array inicial vacío
   const obtenerCategorias = async () => {
@@ -59,6 +61,22 @@ const KioskoProvider = ({ children }) => {
     setModal(!modal);
   };
 
+  //Función que recibe un producto con el campo de cantidad añadido
+  //A su vez, le eliminamos(Le hacemos deconstrucción) los campos categoryId e Image
+  //Seteamos el pedido, añadiéndole el producto actualizado
+  const handleAgregarPedido = ({categoryId, image, ...producto}) => {
+
+    //Comprobamos si ya existe el producto en la cesta
+    //Actualizamos cesta en caso de que ya exista y se añada más
+    if (pedido.some(produ => produ.id === producto.id)){
+      //Actualizar la cantidad
+      const pedidoActualizado = pedido.map(produ => produ.id === producto.id ? producto : produ)
+      setPedido(pedidoActualizado)
+    }else{
+      setPedido([...pedido, producto])
+    }
+  }
+
   return (
     <KioskoContext.Provider
       value={{
@@ -70,6 +88,7 @@ const KioskoProvider = ({ children }) => {
         handleSetProducto,
         modal,
         handleChangeModal,
+        handleAgregarPedido,
       }}
     >
       {children}

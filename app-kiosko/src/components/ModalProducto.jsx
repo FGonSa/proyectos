@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { formatearDinero } from "@/helpers/helpers";
 
 const ModalProducto = () => {
-  const { producto, handleChangeModal } = useKiosko();
+  const { producto, handleChangeModal, handleAgregarPedido } = useKiosko();
 
   const [cantidad, setCantidad] = useState(1);
 
@@ -90,6 +90,12 @@ const ModalProducto = () => {
             </svg>
           </button>
         </div>
+
+        <button
+        onClick={() => handleAgregarPedido({...producto, cantidad})}
+        type="button"
+        className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
+        >Add to Basket</button>
       </div>
     </div>
   );
