@@ -133,7 +133,6 @@ const KioskoProvider = ({ children }) => {
 
       //Una vez registrado el pedido, Resetear la APP
       setCategoriaActual(categorias[0]);
-      setAutores([]);
       setPedido([]);
       setNombre("");
       setTotal(0);

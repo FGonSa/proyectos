@@ -37,6 +37,7 @@ model Order{
   date String
   total Float
   pedido Json
+  estado Boolean @default(false)
 }
 
 model Author{
