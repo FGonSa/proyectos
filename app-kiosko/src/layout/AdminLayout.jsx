@@ -20,7 +20,7 @@ export default function AdminLayout({ children, pagina }) {
                 <Image
                     width={300}
                     height={100}
-                    src="/assets/img/logo.svg"
+                    src="/assets/img/logoBook.png"
                     alt="imagen logotipo"
                 />
             </aside>
