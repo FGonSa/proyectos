@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 const KioskoContext = createContext();
 
 const KioskoProvider = ({ children }) => {
+  //STATES//
+
   //Array vacío
   const [categorias, setCategorias] = useState([]);
 
@@ -18,10 +20,15 @@ const KioskoProvider = ({ children }) => {
 
   const [modal, setModal] = useState(false);
 
-  const [pedido, setPedido] = useState([])
+  const [pedido, setPedido] = useState([]);
 
-  const router = useRouter()
+  //Nombre del cliente en la pestaña Total
+  const [nombre, setNombre] = useState("");
 
+  //Total a pagar en la Cesta
+  const [total, setTotal] = useState(0);
+
+  const router = useRouter();
 
   //Obtenemos las categorías de la Base de Datos mediante Axios
   //Guardamos las categorías en el array inicial vacío
@@ -55,7 +62,7 @@ const KioskoProvider = ({ children }) => {
   const handleClickCategoria = (id) => {
     const categoria = categorias.filter((cat) => cat.id === id);
     setCategoriaActual(categoria[0]);
-    router.push('/')
+    router.push("/");
   };
 
   //Función para setear producto
@@ -70,34 +77,76 @@ const KioskoProvider = ({ children }) => {
   //Función que recibe un producto con el campo de cantidad añadido
   //A su vez, le eliminamos(Le hacemos deconstrucción) el campo categoryId
   //Seteamos el pedido, añadiéndole el producto actualizado
-  const handleAgregarPedido = ({categoryId, ...producto}) => {
-
+  const handleAgregarPedido = ({ categoryId, ...producto }) => {
     //Comprobamos si ya existe el producto en la cesta
     //Actualizamos cesta en caso de que ya exista y se añada más
-    if (pedido.some(produ => produ.id === producto.id)){
+    if (pedido.some((produ) => produ.id === producto.id)) {
       //Actualizar la cantidad
-      const pedidoActualizado = pedido.map(produ => produ.id === producto.id ? producto : produ)
-      setPedido(pedidoActualizado)
-      toast.success('Updated successfully.')
-    }else{
-      setPedido([...pedido, producto])
-      toast.success('Added to Basket.')
+      const pedidoActualizado = pedido.map((produ) =>
+        produ.id === producto.id ? producto : produ
+      );
+      setPedido(pedidoActualizado);
+      toast.success("Updated successfully.");
+    } else {
+      setPedido([...pedido, producto]);
+      toast.success("Added to Basket.");
     }
-    setModal(false)
-  }
+    setModal(false);
+  };
 
   //Función para editar las cantidades en la página Resumen
-  const handleEditarCantidades = id => {
-    const productoActualizar = pedido.filter(producto => producto.id === id)
-    setProducto(productoActualizar[0])
-    setModal(!modal)
-  }
+  const handleEditarCantidades = (id) => {
+    const productoActualizar = pedido.filter((producto) => producto.id === id);
+    setProducto(productoActualizar[0]);
+    setModal(!modal);
+  };
 
   //Función para eliminar un producto de la cesta en la página Resumen
-  const handleEliminarProducto = id => {
-    const productoActualizado = pedido.filter(producto => producto.id !== id)
-    setPedido(productoActualizado)
-  }
+  const handleEliminarProducto = (id) => {
+    const productoActualizado = pedido.filter((producto) => producto.id !== id);
+    setPedido(productoActualizado);
+  };
+
+  //Se va calculando el total cada vez que se modifica el pedido
+  useEffect(() => {
+    const nuevoTotal = pedido.reduce(
+      (total, producto) => producto.price * producto.cantidad + total,
+      0
+    );
+    setTotal(nuevoTotal);
+  }, [pedido]);
+
+  //Función para realizar el INSERT en la BD
+  //Se realiza la conexión con el servidor mediante axios
+  //Accedemos a la URL del servidor que está preparada para realizar un INSERT
+  //En el segundo parámetro enviamos el objeto a insertar: la orden con el pedido
+  const colocarOrden = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await axios.post("/api/ordenes", {
+        pedido,
+        nombre,
+        total,
+        fecha: Date.now().toString(),
+      });
+
+      //Una vez registrado el pedido, Resetear la APP
+      setCategoriaActual(categorias[0]);
+      setAutores([]);
+      setPedido([]);
+      setNombre("");
+      setTotal(0);
+
+      toast.success('Order completed successfully!')
+
+      setTimeout(()=>{
+        router.push('/')
+      }, 3000)
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <KioskoContext.Provider
@@ -113,7 +162,11 @@ const KioskoProvider = ({ children }) => {
         handleAgregarPedido,
         pedido,
         handleEditarCantidades,
-        handleEliminarProducto
+        handleEliminarProducto,
+        nombre,
+        setNombre,
+        colocarOrden,
+        total,
       }}
     >
       {children}
