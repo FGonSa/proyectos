@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 const pasos = [
     {paso: 1, nombre: 'Menu', url: '/'},
     {paso: 2, nombre: 'Resume', url: '/resume'},
-    {paso: 3, nombre: 'Total', url: '/total'},
+    {paso: 3, nombre: 'Pay', url: '/total'},
 ]
 function Pasos() {
 

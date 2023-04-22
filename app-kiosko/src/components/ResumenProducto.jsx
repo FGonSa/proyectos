@@ -11,7 +11,7 @@ function ResumenProducto({producto}) {
     <div className='shadow p-5 mb-3 flex gap-10 items-center'>
         <div className='md:w-1/6'>
             <Image 
-                    src={`/assets/img/book.png`} //${image}
+                    src={`/assets/img/${producto.image}.png`} //${image}
                     alt={`Book Image`}
                     width={300}
                     height={400}

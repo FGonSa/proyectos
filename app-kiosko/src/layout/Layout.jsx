@@ -35,8 +35,8 @@ function Layout({children, pagina}) {
         <meta name='description' content='Book Catalog' />
     </Head>
 
-    <div className='md:flex'>
-        <aside className='md:w-4/12  xl:w-1/4 2xl:w-1/5'>
+    <div className='md:flex '>
+        <aside className='md:w-4/12  xl:w-1/4 2xl:w-1/5 shadow-xl'>
             <Sidebar />
         </aside>
 

@@ -14,7 +14,7 @@ export default function Admin() {
 
     return(
         <AdminLayout pagina={'Admin'}>
-            <h1 className="text-4xl font-black">Admin Panel</h1>
+            <h1 className="text-4xl font-black">Order Panel</h1>
             <p className="text-2xl my-10">Admin the orders</p>
 
             {data && data.length ? data.map(orden => (

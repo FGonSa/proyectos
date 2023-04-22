@@ -122,13 +122,15 @@ const KioskoProvider = ({ children }) => {
   //En el segundo parámetro enviamos el objeto a insertar: la orden con el pedido
   const colocarOrden = async (e) => {
     e.preventDefault();
+    const tiempoTranscurrido = Date.now();
+const hoy = new Date(tiempoTranscurrido);
 
     try {
       const { data } = await axios.post("/api/ordenes", {
         pedido,
         nombre,
         total,
-        fecha: Date.now().toString(),
+        fecha: hoy.toLocaleDateString(),
       });
 
       //Una vez registrado el pedido, Resetear la APP

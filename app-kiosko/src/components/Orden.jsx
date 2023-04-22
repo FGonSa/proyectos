@@ -29,13 +29,14 @@ function Orden({ orden }) {
           <Image 
           width={400}
           height={500}
-          src={`/assets/img/book.png`}
+          src={`/assets/img/${book.image}.png`}
           alt={"Book Cover"}
           />
             </div>
 
             <div className="p-5 space-y-2">
               <h4 className="text-xl font-bold text-amber-900">{book.name}</h4>
+              <p>{book.autor}</p>
               <p className="text-lg font-bold">Quantity: {book.cantidad}</p>
             </div>
           </div>

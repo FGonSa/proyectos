@@ -16,9 +16,10 @@ export default function AdminLayout({ children, pagina }) {
       </Head>
 
       <div className="md:flex">
-            <aside className="md:w-4/12 xl:w-1/4 2xl:w-1/5 py-5">
+            <aside className="md:w-4/12  xl:w-1/4 2xl:w-1/5 shadow-xl">
                 <Image
-                    width={300}
+                className="object-center"
+                    width={500}
                     height={100}
                     src="/assets/img/logoBook.png"
                     alt="imagen logotipo"

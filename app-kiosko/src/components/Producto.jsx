@@ -28,7 +28,7 @@ function Producto({ producto }) {
   return (
     <div className="border p-3">
       <Image
-        src={`/assets/img/book.png`} //${image}
+        src={`/assets/img/${image}.png`} //${image}
         alt={`Book Image`}
         width={400}
         height={500}
